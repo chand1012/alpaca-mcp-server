@@ -131,30 +131,14 @@ except ImportError:
     )
 
 from mcp.server.fastmcp import FastMCP
+from alpaca_mcp_server.user_agent_mixin import UserAgentMixin
 
-# Configure Python path for local imports (UserAgentMixin)
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = Path(current_dir).parent.parent
-github_core_path = project_root / '.github' / 'core'
-if github_core_path.exists() and str(github_core_path) not in sys.path:
-    sys.path.insert(0, str(github_core_path))
-
-# Import the UserAgentMixin
-try:
-    from user_agent_mixin import UserAgentMixin
-    # Define new classes using the mixin
-    class TradingClientSigned(UserAgentMixin, TradingClient): pass
-    class StockHistoricalDataClientSigned(UserAgentMixin, StockHistoricalDataClient): pass
-    class OptionHistoricalDataClientSigned(UserAgentMixin, OptionHistoricalDataClient): pass
-    class CorporateActionsClientSigned(UserAgentMixin, CorporateActionsClient): pass
-    class CryptoHistoricalDataClientSigned(UserAgentMixin, CryptoHistoricalDataClient): pass
-except ImportError:
-    # Fallback to unsigned clients if mixin not available
-    TradingClientSigned = TradingClient
-    StockHistoricalDataClientSigned = StockHistoricalDataClient
-    OptionHistoricalDataClientSigned = OptionHistoricalDataClient
-    CorporateActionsClientSigned = CorporateActionsClient
-    CryptoHistoricalDataClientSigned = CryptoHistoricalDataClient
+# Define new classes using the mixin
+class TradingClientSigned(UserAgentMixin, TradingClient): pass
+class StockHistoricalDataClientSigned(UserAgentMixin, StockHistoricalDataClient): pass
+class OptionHistoricalDataClientSigned(UserAgentMixin, OptionHistoricalDataClient): pass
+class CorporateActionsClientSigned(UserAgentMixin, CorporateActionsClient): pass
+class CryptoHistoricalDataClientSigned(UserAgentMixin, CryptoHistoricalDataClient): pass
 
 # Load environment variables
 load_dotenv()
