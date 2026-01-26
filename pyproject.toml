@@ -46,6 +46,7 @@ dependencies = [
     "mcp>=1.21.0,<1.25.0",           # Model Context Protocol framework
     "alpaca-py>=0.29.0",           # Alpaca Trading API client
     "python-dotenv>=1.0.0",        # Environment variable management
+    "pytz>=2025.2",                # Timezone utilities
     "click>=8.1.0"                 # CLI framework for commands
 ]
 
